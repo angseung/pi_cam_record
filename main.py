@@ -1,8 +1,6 @@
-from picamera import PiCamera
-from time import sleep
+from picamera2 import Picamera2
 
-camera = PiCamera()
 
-camera.start_preview()
-sleep(5)
-camera.stop_preview()
+picam2 = Picamera2()
+picam2.start_and_capture_file("test.jpg")
+picam2.start_and_record_video("test.mp4", duration=5)

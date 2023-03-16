@@ -1,4 +1,3 @@
-picamera
+picamera2
 opencv-python
 black
-keyboard

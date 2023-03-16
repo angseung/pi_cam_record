@@ -9,6 +9,7 @@ GPIO.setmode(GPIO.BOARD)
 GPIO.setup(btnPin, GPIO.IN, GPIO.PUD_UP)
 
 picam2 = Picamera2()
+picam2.start_preview()
 
 while True:
     GPIO.wait_for_edge(btnPin, GPIO.RISING, bouncetime=100)

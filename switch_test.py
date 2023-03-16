@@ -9,14 +9,18 @@ GPIO.setmode(GPIO.BOARD)
 GPIO.setup(btnPin, GPIO.IN, GPIO.PUD_UP)
 
 picam2 = Picamera2()
-picam2.start_preview()
+config = picam2.create_preview_configuration({"size": (1280, 720)})
+picam2.configure(config)
+
+picam2.start(show_preview=True)
 
 while True:
     GPIO.wait_for_edge(btnPin, GPIO.RISING, bouncetime=100)
-    time.sleep(1.0)
+    time.sleep(0.5)
     print(GPIO.input(btnPin))
 
     if GPIO.input(btnPin) == 0:
-        print("switch pushed")
         now = str(datetime.now())
-        picam2.start_and_capture_file(f"test_{now}.jpg")
+        print(f"switch pushed at {now}")
+        picam2.capture_file(f"test_{now}.jpg")
+        print(f"image saved, {now}")
